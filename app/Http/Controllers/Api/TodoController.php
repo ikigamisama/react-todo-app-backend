@@ -87,4 +87,22 @@ class TodoController extends Controller
 
         return response()->json(['id' => $todo->id ,'message' => 'Successful Delete'],200);
     }
+    public function getStatistic (Request $request){
+        $current_Date =  date('Y-m-d');
+        $countOutput = array();
+     
+        $countAllTodo = Todo::where(['user_id' => $request->user()->id])->count();
+        $countAllTodoChecked = Todo::where('is_already_todo','true')->count();
+        $countAllTodoThisDate = Todo::where(['todo_date' => $current_Date,'user_id' => $request->user()->id])->count();
+ 
+     
+        $countOutput = array(
+            'all_todo_post' => $countAllTodo,
+            'all_todo_check' => $countAllTodoChecked,
+            'all_todo_this_date' => $countAllTodoThisDate
+        );
+ 
+        return json_encode($countOutput);
+        
+    }
 }
