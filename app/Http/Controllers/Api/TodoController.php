@@ -102,7 +102,7 @@ class TodoController extends Controller
             'all_todo_this_date' => $countAllTodoThisDate
         );
  
-        return json_encode($countOutput);
+        return response()->json($countOutput,200);
         
     }
 }

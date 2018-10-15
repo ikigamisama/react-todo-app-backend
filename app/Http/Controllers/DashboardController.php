@@ -52,7 +52,7 @@ class DashboardController extends Controller
        $current_Date =  date('Y-m-d');
        $countOutput = array();
     
-       $countAllTodo = Todo::where(['user_id' => $request->user()->id])->count();
+       $countAllTodo = Todo::where(['user_id' => auth()->user()->id])->count();
        $countAllTodoChecked = Todo::where('is_already_todo','true')->count();
        $countAllTodoThisDate = Todo::where(['todo_date' => $current_Date,'user_id' => auth()->user()->id])->count();
 
